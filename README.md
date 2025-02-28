@@ -1,4 +1,4 @@
-# Task Management System
+# Scrum Board System
 
 This project is a Task Management System built with Node.js and Express. It allows users to manage tasks and assign them to team members based on their roles. The system supports creating, assigning, marking as done, and removing tasks. It also includes functionality for generating profile pictures based on user initials.
 
