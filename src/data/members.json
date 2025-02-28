@@ -1,0 +1,32 @@
+[
+  {
+    "id": "da2a3de1-3169-4f33-a49b-975052b6d712",
+    "name": "Clara Leivas",
+    "roles": [
+      "backend",
+      "frontend",
+      "ux"
+    ]
+  },
+  {
+    "id": "a1029c2b-a52c-4aa0-bf1d-bd501461de57",
+    "name": "Adrian Tayeh",
+    "roles": [
+      "frontend"
+    ]
+  },
+  {
+    "id": "af78ddd1-21a3-4a9e-b39f-6720e805290b",
+    "name": "Kevin Ruangrad",
+    "roles": [
+      "backend"
+    ]
+  },
+  {
+    "id": "3803468f-f68e-4844-a185-f31178d36ab3",
+    "name": "Marcel Cios",
+    "roles": [
+      "ux"
+    ]
+  }
+]
