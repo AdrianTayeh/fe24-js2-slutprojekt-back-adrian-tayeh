@@ -9,10 +9,3 @@ This project is a Task Management System built with Node.js and Express. It allo
 - **Profile Picture Generation**: Generate profile pictures based on user initials.
 - **Timestamp Formatting**: Format timestamps as `dd/MM/yyyy HH:mm`.
 
-## Installation
-
-1. Clone the repository:
-
-   ```sh
-   git clone https://github.com/your-username/task-management-system.git
-   cd task-management-system
