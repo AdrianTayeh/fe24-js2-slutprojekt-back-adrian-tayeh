@@ -77,42 +77,12 @@ export class TaskService {
       throw new Error("Error removing task");
     }
   }
-  async getTasks(
-    memberId?: string,
-    category?: string,
-    sort?: string
-  ): Promise<Task[]> {
+  async getTasks(): Promise<Task[]> {
     try {
-      let tasks = await this.readTasksFromFile();
-      let filteredTasks = tasks;
-      if (memberId) {
-        filteredTasks = filteredTasks.filter(
-          (task) => task.assigned === memberId
-        );
+        const tasks = await this.readTasksFromFile();
+        return tasks;
+      } catch (error) {
+        throw new Error("Error getting tasks");
       }
-      if (category) {
-        filteredTasks = filteredTasks.filter(
-          (task) => task.category === category
-        );
-      }
-      if (sort === "timestamp_asc") {
-        filteredTasks.sort(
-          (a, b) =>
-            new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-        );
-      } else if (sort === "timestamp_desc") {
-        filteredTasks.sort(
-          (a, b) =>
-            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        );
-      } else if (sort === "title_asc") {
-        filteredTasks.sort((a, b) => a.title.localeCompare(b.title));
-      } else if (sort === "title_desc") {
-        filteredTasks.sort((a, b) => b.title.localeCompare(a.title));
-      }
-      return filteredTasks;
-    } catch (error) {
-      throw new Error("Error getting tasks");
-    }
   }
 }

@@ -5,7 +5,7 @@ import { MemberService } from "../services/MemberService.js";
 
 const memberService = new MemberService();
 
-const validRoles = ["ux designer", "frontend developer", "backend developer"];
+const validRoles = ["ux", "frontend", "backend"];
 
 export const addMember = async (req: Request, res: Response): Promise<void> => {
   try {

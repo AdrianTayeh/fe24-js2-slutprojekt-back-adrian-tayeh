@@ -87,12 +87,7 @@ export const removeTask = async (
 
 export const getTasks = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { memberId, category, sort } = req.query;
-    const tasks = await taskService.getTasks(
-      memberId as string,
-      category as string,
-      sort as string
-    );
+    const tasks = await taskService.getTasks();
     res.status(200).json(tasks);
   } catch (error) {
     res
