@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { Member } from "../models/members.js";
 import { MemberService } from "../services/MemberService.js";
@@ -7,7 +7,7 @@ const memberService = new MemberService();
 
 const validRoles = ["ux", "frontend", "backend"];
 
-export const addMember = async (req: Request, res: Response): Promise<void> => {
+export const addMember = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { name, roles } = req.body;
 
@@ -29,18 +29,19 @@ export const addMember = async (req: Request, res: Response): Promise<void> => {
     const member = await memberService.addMember(newMember);
     res.status(201).json(member);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
 export const getMembers = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<void> => {
   try {
     const members = await memberService.getMembers();
     res.status(200).json(members);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
