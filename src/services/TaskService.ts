@@ -28,7 +28,7 @@ export class TaskService {
       const tasks = await this.readTasksFromFile();
       tasks.push(task);
       await this.writeTasksToFile(tasks);
-      if(task.parentId) {
+      if (task.parentId) {
         await this.updateParentTaskWithSubtask(task.parentId, task.id);
       }
       return task;
@@ -37,14 +37,18 @@ export class TaskService {
     }
   }
 
-  async updateParentTaskWithSubtask(parentId: string, subtaskId: string) {
+  async updateParentTaskWithSubtask(parentId: string, subtaskId: string): Promise<Task | null> {
     try {
       const tasks = await this.readTasksFromFile();
       const parentTask = tasks.find(t => t.id === parentId);
       const subtask = tasks.find(t => t.id === subtaskId);
       if (parentTask && subtask) {
-        parentTask.subtasks.push(subtask);
-        await this.writeTasksToFile(tasks);
+        // Check if the subtask is already added to prevent duplicates
+        if (!parentTask.subtasks.some(t => t.id === subtaskId)) {
+          parentTask.subtasks.push(subtask);
+          await this.writeTasksToFile(tasks);
+        }
+        return parentTask;
       } else {
         throw new Error("Parent task or subtask not found");
       }
