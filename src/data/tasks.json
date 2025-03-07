@@ -5,7 +5,8 @@
     "description": "Fininsh the frontend",
     "category": "frontend",
     "status": "to do",
-    "timestamp": "28/02/2025 15:26"
+    "timestamp": "28/02/2025 15:26",
+    "priority": "low"
   },
   {
     "id": "3ec9ef4b-a5b2-4b0f-9e28-38bab092401b",
@@ -13,7 +14,8 @@
     "description": "Fininsh the backend",
     "category": "backend",
     "status": "to do",
-    "timestamp": "28/02/2025 15:26"
+    "timestamp": "28/02/2025 15:26",
+    "priority": "medium"
   },
   {
     "id": "2e855acc-7d07-433e-8e0f-81a46978781e",
@@ -21,7 +23,8 @@
     "description": "Fininsh the wireframe",
     "category": "ux",
     "status": "to do",
-    "timestamp": "28/02/2025 15:26"
+    "timestamp": "28/02/2025 15:26",
+    "priority": "high"
   },
   {
     "id": "3b0ab08e-59df-4e89-9c4f-b9c1ca28adf5",
@@ -29,7 +32,8 @@
     "description": "Fininsh the design",
     "category": "ux",
     "status": "to do",
-    "timestamp": "28/02/2025 15:26"
+    "timestamp": "28/02/2025 15:26",
+    "priority": "low"
   },
   {
     "id": "66bb164f-b427-4143-833c-0186729b2fe2",
@@ -37,7 +41,8 @@
     "description": "Fininsh the database",
     "category": "backend",
     "status": "to do",
-    "timestamp": "28/02/2025 15:27"
+    "timestamp": "28/02/2025 15:27",
+    "priority": "medium"
   },
   {
     "id": "25b39f85-219a-4331-aa1e-9a8aa60c4998",
@@ -45,6 +50,7 @@
     "description": "Fix the UI",
     "category": "ux",
     "status": "to do",
-    "timestamp": "28/02/2025 15:27"
+    "timestamp": "28/02/2025 15:27",
+    "priority": "high"
   }
 ]
