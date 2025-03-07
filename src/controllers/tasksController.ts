@@ -28,6 +28,30 @@ export const addTask = async (req: Request, res: Response, next: NextFunction): 
   }
 };
 
+export const addSubtask = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { parentId } = req.params;
+    const { title, description, category, priority } = req.body;
+    const formattedDate = format(new Date(), "dd/MM/yyyy HH:mm");
+    const newTask: Task = {
+      id: uuidv4(),
+      title,
+      description,
+      category,
+      status: "to do",
+      assigned: undefined,
+      timestamp: formattedDate,
+      priority,
+      parentId,
+      subtasks: [],
+    };
+    const subtask = await taskService.addSubtask(parentId, newTask);
+    res.status(201).json(subtask);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const assignTask = async (
   req: Request,
   res: Response,

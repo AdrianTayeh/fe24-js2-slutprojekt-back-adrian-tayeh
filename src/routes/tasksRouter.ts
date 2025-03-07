@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
-import { addTask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority } from '../controllers/tasksController.js';
+import { addTask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority, addSubtask } from '../controllers/tasksController.js';
 import { validate } from '../middleware/validationMiddleware.js';
 
 const router = Router();
@@ -16,6 +16,19 @@ router.post(
     validate,
   ],
   addTask
+);
+
+router.patch(
+  '/tasks/:parentId/subtasks',
+  [
+    param('parentId').isUUID().withMessage('Invalid parent ID'),
+    body('title').notEmpty().withMessage('Title is required'),
+    body('description').notEmpty().withMessage('Description is required'),
+    body('category').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid category'),
+    body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
+    validate,
+  ],
+  addSubtask
 );
 
 router.patch(
