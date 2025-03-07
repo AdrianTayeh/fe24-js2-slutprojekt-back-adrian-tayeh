@@ -8,4 +8,5 @@ export type Task =  {
     timestamp: string;
     priority: 'low' | 'medium' | 'high';
     parentId?: string;
+    subtasks: Task[];
 }

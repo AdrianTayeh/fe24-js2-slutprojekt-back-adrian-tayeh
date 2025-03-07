@@ -19,6 +19,7 @@ export const addTask = async (req: Request, res: Response, next: NextFunction): 
       timestamp: formattedDate,
       priority,
       parentId,
+      subtasks: [],
     };
     const task = await taskService.addTask(newTask);
     res.status(201).json(task);
