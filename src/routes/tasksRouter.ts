@@ -11,6 +11,7 @@ router.post(
     body('title').notEmpty().withMessage('Title is required'),
     body('description').notEmpty().withMessage('Description is required'),
     body('category').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid category'),
+    body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
     validate,
   ],
   addTask
