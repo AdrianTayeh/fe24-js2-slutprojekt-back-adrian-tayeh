@@ -6,7 +6,8 @@
     "category": "frontend",
     "status": "to do",
     "timestamp": "28/02/2025 15:26",
-    "priority": "low"
+    "priority": "low",
+    "subtasks":	[]
   },
   {
     "id": "3ec9ef4b-a5b2-4b0f-9e28-38bab092401b",
@@ -15,7 +16,8 @@
     "category": "backend",
     "status": "to do",
     "timestamp": "28/02/2025 15:26",
-    "priority": "medium"
+    "priority": "medium",
+    "subtasks":	[]
   },
   {
     "id": "2e855acc-7d07-433e-8e0f-81a46978781e",
@@ -24,7 +26,8 @@
     "category": "ux",
     "status": "to do",
     "timestamp": "28/02/2025 15:26",
-    "priority": "high"
+    "priority": "high",
+    "subtasks":	[]
   },
   {
     "id": "3b0ab08e-59df-4e89-9c4f-b9c1ca28adf5",
@@ -33,7 +36,8 @@
     "category": "ux",
     "status": "to do",
     "timestamp": "28/02/2025 15:26",
-    "priority": "low"
+    "priority": "low",
+    "subtasks":	[]
   },
   {
     "id": "66bb164f-b427-4143-833c-0186729b2fe2",
@@ -42,7 +46,8 @@
     "category": "backend",
     "status": "to do",
     "timestamp": "28/02/2025 15:27",
-    "priority": "medium"
+    "priority": "medium",
+    "subtasks":	[]
   },
   {
     "id": "25b39f85-219a-4331-aa1e-9a8aa60c4998",
@@ -51,6 +56,7 @@
     "category": "ux",
     "status": "to do",
     "timestamp": "28/02/2025 15:27",
-    "priority": "high"
+    "priority": "high",
+    "subtasks":	[]
   }
 ]
