@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
-import { addTask, addSubtask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority } from '../controllers/tasksController.js';
+import { addTask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority } from '../controllers/tasksController.js';
 import { validate } from '../middleware/validationMiddleware.js';
+import { TaskService } from '../services/TaskService.js';
 
 const router = Router();
 
@@ -22,13 +23,20 @@ router.patch(
   '/tasks/:parentId/subtasks',
   [
     param('parentId').isUUID().withMessage('Invalid parent task ID'),
-    body('title').notEmpty().withMessage('Title is required'),
-    body('description').notEmpty().withMessage('Description is required'),
-    body('category').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid category'),
-    body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
+    body('subtaskId').isUUID().withMessage('Invalid subtask ID'),
     validate,
   ],
-  addSubtask
+  async (req, res, next) => {
+    try {
+      const { parentId } = req.params;
+      const { subtaskId } = req.body;
+      const taskService = new TaskService();
+      const updatedParentTask = await taskService.updateParentTaskWithSubtask(parentId, subtaskId);
+      res.status(200).json(updatedParentTask);
+    } catch (error) {
+      next(error);
+    }
+  }
 );
 
 router.patch(

@@ -23,31 +23,10 @@ export const addTask = async (req: Request, res: Response, next: NextFunction): 
       subtasks: [],
     };
     const task = await taskService.addTask(newTask);
+    if (parentId) {
+      await taskService.updateParentTaskWithSubtask(parentId, task.id);
+    }
     res.status(201).json(task);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const addSubtask = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  try {
-    const { parentId } = req.params;
-    const { title, description, category, priority } = req.body;
-    const formattedDate = format(new Date(), "dd/MM/yyyy HH:mm");
-    const newSubtask: Task = {
-      id: uuidv4(),
-      title,
-      description,
-      category,
-      status: "to do",
-      assigned: null,
-      timestamp: formattedDate,
-      priority,
-      parentId,
-      subtasks: [],
-    };
-    const subtask = await taskService.addSubtask(parentId, newSubtask);
-    res.status(201).json(subtask);
   } catch (error) {
     next(error);
   }
