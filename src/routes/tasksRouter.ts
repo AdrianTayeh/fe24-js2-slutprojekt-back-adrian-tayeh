@@ -12,6 +12,7 @@ router.post(
     body('description').notEmpty().withMessage('Description is required'),
     body('category').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid category'),
     body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
+    body('parentId').optional().isUUID().withMessage('Invalid parent ID'),
     validate,
   ],
   addTask

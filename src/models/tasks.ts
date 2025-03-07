@@ -7,4 +7,5 @@ export type Task =  {
     assigned?: string;
     timestamp: string;
     priority: 'low' | 'medium' | 'high';
+    parentId?: string;
 }
