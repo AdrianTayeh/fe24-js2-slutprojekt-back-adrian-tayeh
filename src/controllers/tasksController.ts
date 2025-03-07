@@ -7,7 +7,7 @@ import { format } from "date-fns/format";
 const taskService = new TaskService();
 export const addTask = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { title, description, category } = req.body;
+    const { title, description, category, priority } = req.body;
     const formattedDate = format(new Date(), "dd/MM/yyyy HH:mm");
     const newTask: Task = {
       id: uuidv4(),
@@ -17,7 +17,7 @@ export const addTask = async (req: Request, res: Response, next: NextFunction): 
       status: "to do",
       assigned: undefined,
       timestamp: formattedDate,
-      priority: "low",
+      priority,
     };
     const task = await taskService.addTask(newTask);
     res.status(201).json(task);
