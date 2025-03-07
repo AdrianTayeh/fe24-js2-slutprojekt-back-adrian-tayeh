@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
-import { addTask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority, addSubtask } from '../controllers/tasksController.js';
+import { addTask, addSubtask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority } from '../controllers/tasksController.js';
 import { validate } from '../middleware/validationMiddleware.js';
 
 const router = Router();
@@ -12,7 +12,7 @@ router.post(
     body('description').notEmpty().withMessage('Description is required'),
     body('category').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid category'),
     body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
-    body('parentId').optional().isUUID().withMessage('Invalid parent ID'),
+    body('parentId').optional().isUUID().withMessage('Invalid parent task ID'),
     validate,
   ],
   addTask
@@ -21,7 +21,7 @@ router.post(
 router.patch(
   '/tasks/:parentId/subtasks',
   [
-    param('parentId').isUUID().withMessage('Invalid parent ID'),
+    param('parentId').isUUID().withMessage('Invalid parent task ID'),
     body('title').notEmpty().withMessage('Title is required'),
     body('description').notEmpty().withMessage('Description is required'),
     body('category').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid category'),
@@ -48,7 +48,7 @@ router.patch(
 );
 
 router.patch(
-  '/tasks/:id',
+  '/tasks/:id/priority',
   [
     param('id').isUUID().withMessage('Invalid task ID'),
     body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),

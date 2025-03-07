@@ -14,6 +14,7 @@ export class TaskService {
       throw new Error("Error reading tasks file");
     }
   }
+
   async writeTasksToFile(tasks: Task[]): Promise<void> {
     try {
       await fs.writeFile(tasksFilePath, JSON.stringify(tasks, null, 2));
@@ -21,12 +22,13 @@ export class TaskService {
       throw new Error("Error writing tasks file");
     }
   }
+
   async addTask(task: Task): Promise<Task> {
     try {
       const tasks = await this.readTasksFromFile();
-      if(task.parentId) {
+      if (task.parentId) {
         const parentTask = tasks.find(t => t.id === task.parentId);
-        if(parentTask) {
+        if (parentTask) {
           parentTask.subtasks.push(task);
         } else {
           throw new Error("Parent task not found");
@@ -40,11 +42,12 @@ export class TaskService {
       throw new Error("Error adding task");
     }
   }
+
   async addSubtask(parentId: string, subtask: Task): Promise<Task | null> {
     try {
       const tasks = await this.readTasksFromFile();
       const parentTask = tasks.find(t => t.id === parentId);
-      if(parentTask) {
+      if (parentTask) {
         parentTask.subtasks.push(subtask);
         await this.writeTasksToFile(tasks);
         return subtask;
@@ -55,7 +58,8 @@ export class TaskService {
       throw new Error("Error adding subtask");
     }
   }
-  async assignTask(id: string, memberId: string): Promise<Task> {
+
+  async assignTask(id: string, memberId: string): Promise<Task | null> {
     try {
       const tasks = await this.readTasksFromFile();
       const task = tasks.find((task) => task.id === id);
@@ -73,6 +77,7 @@ export class TaskService {
       throw new Error("Error assigning task");
     }
   }
+
   async markTaskAsDone(id: string): Promise<Task | null> {
     try {
       const tasks = await this.readTasksFromFile();
@@ -87,6 +92,7 @@ export class TaskService {
       throw new Error("Error marking task as done");
     }
   }
+
   async removeTask(id: string): Promise<boolean> {
     try {
       const tasks = await this.readTasksFromFile();
@@ -101,15 +107,17 @@ export class TaskService {
       throw new Error("Error removing task");
     }
   }
+
   async getTasks(): Promise<Task[]> {
     try {
-        const tasks = await this.readTasksFromFile();
-        return tasks;
-      } catch (error) {
-        throw new Error("Error getting tasks");
-      }
+      const tasks = await this.readTasksFromFile();
+      return tasks;
+    } catch (error) {
+      throw new Error("Error getting tasks");
+    }
   }
-  async updateTaskPriority(id: string, priority: 'low' | 'medium' | 'high'):Promise<Task | null> {
+
+  async updateTaskPriority(id: string, priority: 'low' | 'medium' | 'high'): Promise<Task | null> {
     try {
       const tasks = await this.readTasksFromFile();
       const task = tasks.find((task) => task.id === id);
@@ -122,5 +130,5 @@ export class TaskService {
     } catch (error) {
       throw new Error("Error updating task priority");
     }
-  } 
+  }
 }

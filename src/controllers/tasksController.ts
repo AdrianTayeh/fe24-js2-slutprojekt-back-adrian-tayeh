@@ -2,9 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { Task } from "../models/tasks.js";
 import { TaskService } from "../services/TaskService.js";
-import { format } from "date-fns/format";
+import { format } from "date-fns";
 
 const taskService = new TaskService();
+
 export const addTask = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { title, description, category, priority, parentId } = req.body;
@@ -15,7 +16,7 @@ export const addTask = async (req: Request, res: Response, next: NextFunction): 
       description,
       category,
       status: "to do",
-      assigned: undefined,
+      assigned: null,
       timestamp: formattedDate,
       priority,
       parentId,
@@ -33,24 +34,24 @@ export const addSubtask = async (req: Request, res: Response, next: NextFunction
     const { parentId } = req.params;
     const { title, description, category, priority } = req.body;
     const formattedDate = format(new Date(), "dd/MM/yyyy HH:mm");
-    const newTask: Task = {
+    const newSubtask: Task = {
       id: uuidv4(),
       title,
       description,
       category,
       status: "to do",
-      assigned: undefined,
+      assigned: null,
       timestamp: formattedDate,
       priority,
       parentId,
       subtasks: [],
     };
-    const subtask = await taskService.addSubtask(parentId, newTask);
+    const subtask = await taskService.addSubtask(parentId, newSubtask);
     res.status(201).json(subtask);
   } catch (error) {
     next(error);
   }
-}
+};
 
 export const assignTask = async (
   req: Request,
