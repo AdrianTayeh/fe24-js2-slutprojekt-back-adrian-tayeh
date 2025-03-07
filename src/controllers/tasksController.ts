@@ -89,3 +89,18 @@ export const getTasks = async (req: Request, res: Response, next: NextFunction):
     next(error);
   }
 };
+
+export const updateTaskPriority = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const { priority } = req.body;
+    const task = await taskService.updateTaskPriority(id, priority);
+    if (task) {
+      res.status(200).json(task);
+    } else {
+      res.status(404).json({ message: "Task not found" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
-import { addTask, assignTask, markTaskAsDone, removeTask, getTasks } from '../controllers/tasksController.js';
+import { addTask, assignTask, markTaskAsDone, removeTask, getTasks, updateTaskPriority } from '../controllers/tasksController.js';
 import { validate } from '../middleware/validationMiddleware.js';
 
 const router = Router();
@@ -31,6 +31,16 @@ router.patch(
   '/tasks/:id/done',
   [param('id').isUUID().withMessage('Invalid task ID'), validate],
   markTaskAsDone
+);
+
+router.patch(
+  '/tasks/:id',
+  [
+    param('id').isUUID().withMessage('Invalid task ID'),
+    body('priority').isIn(['low', 'medium', 'high']).withMessage('Invalid priority'),
+    validate,
+  ],
+  updateTaskPriority
 );
 
 router.delete(

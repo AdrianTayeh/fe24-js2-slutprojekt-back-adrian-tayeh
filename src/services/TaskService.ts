@@ -85,4 +85,18 @@ export class TaskService {
         throw new Error("Error getting tasks");
       }
   }
+  async updateTaskPriority(id: string, priority: 'low' | 'medium' | 'high'):Promise<Task | null> {
+    try {
+      const tasks = await this.readTasksFromFile();
+      const task = tasks.find((task) => task.id === id);
+      if (task) {
+        task.priority = priority;
+        await this.writeTasksToFile(tasks);
+        return task;
+      }
+      return null;
+    } catch (error) {
+      throw new Error("Error updating task priority");
+    }
+  } 
 }
