@@ -13,6 +13,7 @@ export class MemberService {
     };
     async addMember(member: Member): Promise<Member> {
         const members = await this.readMembersFromFile();
+        console.log("adding member", member);
         members.push(member);
         await this.writeMembersToFile(members);
         return member;

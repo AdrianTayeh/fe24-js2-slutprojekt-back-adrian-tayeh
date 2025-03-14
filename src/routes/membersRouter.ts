@@ -10,7 +10,7 @@ router.post(
   [
     body('name').notEmpty().withMessage('Name is required'),
     body('roles').isArray().withMessage('Roles must be an array'),
-    body('roles.*').isIn(['ux designer', 'frontend developer', 'backend developer']).withMessage('Invalid role'),
+    body('roles.*').isIn(['ux', 'frontend', 'backend']).withMessage('Invalid role'),
     validate,
   ],
   addMember
